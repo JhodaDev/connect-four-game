@@ -1,6 +1,6 @@
 export const BoardSmallBlack = () => {
   return (
-    <svg width="335" height="320">
+    <svg width="100%" height="100%" viewBox="0 0 335 320">
       <defs>
         <filter x="-1.5%" y="-1.6%" width="103%" height="106.5%" filterUnits="objectBoundingBox" id="a">
           <feOffset dy="10" in="SourceAlpha" result="shadowOffsetOuter1" />
