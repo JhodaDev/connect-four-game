@@ -5,8 +5,19 @@ import playerone from '../assets/player-one.svg'
 import playertwo from '../assets/player-two.svg'
 import { BoardSmallWhite } from '../components/BoardSmallWhite'
 import { BoardSmallBlack } from '../components/BoardSmallBlack'
+import markeryellow from '../assets/marker-yellow.svg'
+import { useState } from 'react'
 
 export const Game = () => {
+  const [gridBoard, setGridBoard] = useState(Array(7).fill(Array(6).fill(0)))
+  const [left, setLeft] = useState(0)
+
+  const handleActiveColumn = (e) => setLeft(e.target.offsetLeft)
+
+  const handleDropDisc = (col, row) => {
+
+  }
+
   return (
     <Layout className="py-10">
       <Container>
@@ -29,14 +40,29 @@ export const Game = () => {
             <strong className="text-[32px]">23</strong>
           </div>
         </div>
-        <div className="mt-12">
-          <div className="relative">
-            <div className='relative z-50'>
+        <div className="mt-24 relative">
+          {left !== 0 && (
+            <div className="absolute -top-10 transition-all" style={{ left }}>
+              <img src={markeryellow} alt="marker-yellow" />
+            </div>
+          )}
+          <div className="absolute max-w-xs w-full">
+            <div className="relative z-50">
               <BoardSmallWhite />
             </div>
-            <div className="absolute top-[-1px]">
+            <div className="absolute top-[-1px] w-full">
               <BoardSmallBlack />
             </div>
+          </div>
+
+          <div className="grid grid-cols-7 relative top-3 z-50 opacity-0">
+            {gridBoard.map((col, indexCol) => (
+              <div key={indexCol} className="flex flex-col items-center gap-2">
+                {col.map((_, indexRow) => (
+                  <div key={indexRow} onMouseEnter={handleActiveColumn} onClick={(e) => handleDropDisc(indexCol, indexRow, e)} className="w-9 h-9 bg-white rounded-full cursor-pointer"></div>
+                ))}
+              </div>
+            ))}
           </div>
         </div>
       </Container>
