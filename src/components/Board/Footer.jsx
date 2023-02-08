@@ -21,13 +21,13 @@ export const Footer = () => {
 
   return (
     <div
-      className={`h-full w-screen relative before:absolute before:left-0 before:top-9 before:w-full  before:h-full before:rounded-tl-[80px] before:rounded-tr-[80px] ${
+      className={`h-full w-screen relative before:absolute before:left-0 before:top-9 md:before:top-11 before:w-full  before:h-full before:rounded-tl-[80px] before:rounded-tr-[80px] ${
         currentWinner === null ? 'before:bg-dark-purple' : currentWinner === 'player1' ? 'before:bg-yellow' : 'before:bg-pink'
       } }`}
     >
       {currentWinner === null ? (
         <div
-          className='h-48 w-full bg-no-repeat bg-center relative z-50 top-3 flex flex-col justify-center items-center pt-6'
+          className='h-48 w-full bg-no-repeat bg-center relative z-50 top-3 md:top-5 flex flex-col justify-center items-center pt-6'
           style={{ backgroundImage: `url(${getBackground()})` }}
         >
           <span className='font-bold text-xs'>PLAYER {turn}’S TURN</span>

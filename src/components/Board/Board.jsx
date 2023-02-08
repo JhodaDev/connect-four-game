@@ -15,6 +15,9 @@ import { setWinners } from '../../redux/slices/playerSlice'
 import markeryellow from '../../assets/marker-yellow.svg'
 import markerred from '../../assets/marker-red.svg'
 import { useWinner } from '../../hooks/useWinner'
+import { BoardWhiteLarge } from './BoardWhiteLarge'
+import { BoardBlackLarge } from './BoardBlackLarge'
+import { Container } from '../Container'
 
 export const Board = () => {
   const { board, left, marker, handleActiveColumn, handleDropDisc } = useBoard()
@@ -38,29 +41,27 @@ export const Board = () => {
           <img src={turn === 1 ? markeryellow : markerred} alt='marker-yellow' />
         </div>
       )}
-      <div className='absolute max-w-xs w-full z-20'>
-        <div className='relative z-50'>
-          <BoardSmallWhite />
+      <Container>
+        <div className='absolute w-full z-20'>
+          <div className='relative z-50'>{width < 640 ? <BoardSmallWhite /> : <BoardWhiteLarge />}</div>
+          {marker?.map(({ lastRow, col, defaultImage }, index) => (
+            <React.Fragment key={index}>
+              <CounterSmall lastIndex={lastRow} row={col} defaultImage={defaultImage} />
+            </React.Fragment>
+          ))}
+          <div className='absolute top-[-1px] w-full z-10'>{width < 640 ? <BoardSmallBlack /> : <BoardBlackLarge />}</div>
         </div>
-        {marker?.map(({ lastRow, col, defaultImage }, index) => (
-          <React.Fragment key={index}>
-            <CounterSmall lastIndex={lastRow} row={col} defaultImage={defaultImage} />
-          </React.Fragment>
-        ))}
-        <div className='absolute top-[-1px] w-full z-10'>
-          <BoardSmallBlack />
-        </div>
-      </div>
+      </Container>
 
       <div className='grid grid-cols-7 relative top-3 z-50 opacity-0'>
         {board?.map((col, indexCol) => (
-          <div key={indexCol} className='flex flex-col items-center gap-2'>
+          <div key={indexCol} className='flex flex-col items-center gap-2 sm:gap-[4.6px]'>
             {col.map((_, indexRow) => (
               <div
                 key={indexRow}
                 onMouseEnter={handleActiveColumn}
                 onClick={(e) => handleDropDisc(indexCol, indexRow, e)}
-                className='w-9 h-9 bg-white rounded-full cursor-pointer'
+                className='w-9 h-9 sm:w-12 sm:h-12 md:w-14 md:h-14 bg-white rounded-full cursor-pointer'
               ></div>
             ))}
           </div>
