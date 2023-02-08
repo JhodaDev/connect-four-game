@@ -6,7 +6,9 @@ module.exports = {
   },
   extends: [
     'plugin:react/recommended',
-    'standard'
+    'plugin:react/jsx-runtime',
+    'standard',
+    'eslint-config-prettier'
   ],
   overrides: [
   ],
@@ -18,7 +20,6 @@ module.exports = {
     'react'
   ],
   rules: {
-    'react/react-in-jsx-scope': 'off',
     'react/prop-types': 'off'
   }
 }
