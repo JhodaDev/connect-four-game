@@ -1,26 +1,40 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 
 // components
 import { CounterSmall } from '../CounterSmall'
 import { BoardSmallWhite } from './BoardSmallWhite'
 import { BoardSmallBlack } from './BoardSmallBlack'
+
 // hooks
 import { useWidth } from '../../hooks/useWidth'
 import { useBoard } from '../../hooks/useBoard'
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
+import { setWinners } from '../../redux/slices/playerSlice'
+
 // images
 import markeryellow from '../../assets/marker-yellow.svg'
 import markerred from '../../assets/marker-red.svg'
+import { useWinner } from '../../hooks/useWinner'
 
 export const Board = () => {
   const { board, left, marker, handleActiveColumn, handleDropDisc } = useBoard()
   const { turn } = useSelector((state) => state.player)
+  const { checkWinner } = useWinner()
   const width = useWidth()
+  const dispatch = useDispatch()
+
+  useEffect(() => {
+    const winner = checkWinner(board)
+    if (winner) {
+      console.log(winner)
+      dispatch(setWinners(winner === 1 ? 'player1' : 'player2'))
+    }
+  }, [board])
 
   return (
     <div className={`relative ${width >= 500 ? 'mt-20' : 'mt-12'}`}>
       {left !== 0 && width >= 500 && (
-        <div className='absolute -top-10 transitiowdn-all' style={{ left }}>
+        <div className='absolute -top-10 transition-all' style={{ left }}>
           <img src={turn === 1 ? markeryellow : markerred} alt='marker-yellow' />
         </div>
       )}

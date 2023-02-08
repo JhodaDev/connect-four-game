@@ -3,7 +3,6 @@ import { createSlice } from '@reduxjs/toolkit'
 const initialState = {
   board: Array(7).fill(Array(6).fill(0)),
   turn: null,
-  winner: null,
   marker: [],
   time: 15
 }
@@ -20,7 +19,6 @@ const boardSlice = createSlice({
       state.board = Array(7).fill(Array(6).fill(0))
       state.marker = []
       state.turn = null
-      state.winner = null
     },
     setMarker: (state, action) => {
       const { lastRow, col, defaultImage } = action.payload

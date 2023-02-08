@@ -11,6 +11,7 @@ export const useBoard = () => {
   const handleActiveColumn = (e) => setLeft(e.target.offsetLeft)
 
   const handleDropDisc = (col) => {
+    if (player.currentWinner) return
     const defaultImage = player.turn === 1 ? 'yellow' : 'red'
     const newBoard = board.board.map((row) => [...row])
     const isEmpty = newBoard[col].every((row) => row === 0)

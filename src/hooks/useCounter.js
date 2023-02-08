@@ -4,10 +4,11 @@ import { setTime } from '../redux/slices/boardReducer'
 import { setTurn } from '../redux/slices/playerSlice'
 
 export const useCounter = () => {
-  const time = useSelector((state) => state.board.time)
+  const { board: { time }, player } = useSelector((state) => state)
   const dispatch = useDispatch()
 
   useEffect(() => {
+    if (player.currentWinner) return
     if (time >= 0) {
       const interval = setInterval(() => {
         dispatch(setTime({ time: time - 1 }))
