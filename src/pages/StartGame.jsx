@@ -10,7 +10,7 @@ export const StartGame = () => {
     <Layout className='flex justify-center items-center'>
       <Container>
         <div className='w-16 mx-auto mb-10'>
-          <img src={logo} alt="logo" className='w-full' />
+          <img src={logo} alt='logo' className='w-full' />
         </div>
 
         <div className='flex flex-col gap-7'>

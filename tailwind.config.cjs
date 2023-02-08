@@ -21,11 +21,13 @@ module.exports = {
         xs: '1rem'
       },
       boxShadow: {
-        // box-shadow: 0px 10px 0px #000000;
         black: '0px 10px 0px #000000'
       },
       maxWidth: {
         xxs: '21.875rem'
+      },
+      maxHeight: {
+        xl: 'calc(100vh + 9rem)'
       }
     }
   },

@@ -2,7 +2,7 @@ import { Provider } from 'react-redux'
 import { store } from './redux/store'
 import { Main } from './routes/Main'
 
-function App () {
+function App() {
   return (
     <Provider store={store}>
       <Main />

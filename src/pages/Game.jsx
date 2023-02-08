@@ -6,7 +6,7 @@ import { Footer } from '../components/Board/Footer'
 
 export const Game = () => {
   return (
-    <Layout className="py-10">
+    <Layout className='py-10'>
       <Container>
         <Header />
         <Board />

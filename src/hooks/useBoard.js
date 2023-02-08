@@ -9,7 +9,6 @@ export const useBoard = () => {
   const { board, player } = useSelector((state) => state)
   const [left, setLeft] = useState(0)
   const handleActiveColumn = (e) => setLeft(e.target.offsetLeft)
-  const [lastIndex, setLastIndex] = useState(0)
 
   const handleDropDisc = (col) => {
     const defaultImage = player.turn === 1 ? 'yellow' : 'red'
@@ -21,13 +20,13 @@ export const useBoard = () => {
       const row = newBoard[col].findIndex((row) => row === 1 || row === 2)
       lastRow = row - 1
     }
+
     newBoard[col][lastRow] = player.turn
     disptatch(updateBoard({ newBoard }))
     disptatch(setMarker({ lastRow, col, defaultImage }))
     disptatch(setTurn())
     disptatch(setTime({ time: 15 }))
-    setLastIndex(lastRow)
   }
 
-  return { handleActiveColumn, handleDropDisc, marker: board.marker, left, board: board.board, lastIndex }
+  return { handleActiveColumn, handleDropDisc, marker: board.marker, left, board: board.board }
 }
