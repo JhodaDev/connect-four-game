@@ -5,6 +5,7 @@ import playervscpu from '../assets/player-vs-cpu.svg'
 import playervsplayer from '../assets/player-vs-player.svg'
 import { Container } from '../components/Container'
 
+
 export const StartGame = () => {
   return (
     <Layout className='flex justify-center items-center'>

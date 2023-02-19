@@ -13,7 +13,15 @@ export const useWinner = () => {
                     board[col][row] === board[col + 2][row] &&
                     board[col][row] === board[col + 3][row]
                 ) {
-                    return board[col][row]
+                    return {
+                        winner: board[col][row],
+                        positions: [
+                            { col, row },
+                            { col: col + 1, row },
+                            { col: col + 2, row },
+                            { col: col + 3, row },
+                        ],
+                    }
                 }
             }
         }
@@ -28,7 +36,15 @@ export const useWinner = () => {
                     board[col][row] === board[col][row + 2] &&
                     board[col][row] === board[col][row + 3]
                 ) {
-                    return board[col][row]
+                    return {
+                        winner: board[col][row],
+                        positions: [
+                            { col, row },
+                            { col, row: row + 1 },
+                            { col, row: row + 2 },
+                            { col, row: row + 3 },
+                        ],
+                    }
                 }
             }
         }
@@ -43,7 +59,15 @@ export const useWinner = () => {
                     board[col][row] === board[col + 2][row - 2] &&
                     board[col][row] === board[col + 3][row - 3]
                 ) {
-                    return board[col][row]
+                    return {
+                        winner: board[col][row],
+                        positions: [
+                            { col, row },
+                            { col: col + 1, row: row - 1 },
+                            { col: col + 2, row: row - 2 },
+                            { col: col + 3, row: row - 3 },
+                        ],
+                    }
                 }
             }
         }
@@ -58,7 +82,15 @@ export const useWinner = () => {
                     board[col][row] === board[col - 2][row - 2] &&
                     board[col][row] === board[col - 3][row - 3]
                 ) {
-                    return board[col][row]
+                    return {
+                        winner: board[col][row],
+                        positions: [
+                            { col, row },
+                            { col: col - 1, row: row - 1 },
+                            { col: col - 2, row: row - 2 },
+                            { col: col - 3, row: row - 3 },
+                        ],
+                    }
                 }
             }
         }

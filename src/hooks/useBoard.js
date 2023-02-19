@@ -8,10 +8,7 @@ export const useBoard = () => {
 
   const { board, player } = useSelector((state) => state)
   const [left, setLeft] = useState(0)
-  const handleActiveColumn = (e) => {
-    setLeft(e.target.offsetLeft)
-    console.log(e.target.offsetTop)
-  }
+  const handleActiveColumn = (e) => setLeft(e.target.offsetLeft)
 
   const handleDropDisc = (col) => {
     if (player.currentWinner) return

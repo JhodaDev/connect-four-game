@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 
 // components
 import { CounterSmall } from '../CounterSmall'
@@ -20,17 +20,18 @@ import { BoardBlackLarge } from './BoardBlackLarge'
 import { Container } from '../Container'
 
 export const Board = () => {
-  const { board, left, marker, handleActiveColumn, handleDropDisc } = useBoard()
   const { turn } = useSelector((state) => state.player)
+  const { board, left, marker, handleActiveColumn, handleDropDisc } = useBoard()
   const { checkWinner } = useWinner()
   const width = useWidth()
   const dispatch = useDispatch()
+  const [winner, setWinner] = useState(null)
 
   useEffect(() => {
     const winner = checkWinner(board)
-    if (winner) {
-      console.log(winner)
-      dispatch(setWinners(winner === 1 ? 'player1' : 'player2'))
+    if (winner?.winner) {
+      dispatch(setWinners(winner.winner === 1 ? 'player1' : 'player2'))
+      setWinner(winner)
     }
   }, [board])
 
@@ -46,7 +47,12 @@ export const Board = () => {
           <div className='relative z-50'>{width < 640 ? <BoardSmallWhite /> : <BoardWhiteLarge />}</div>
           {marker?.map(({ lastRow, col, defaultImage }, index) => (
             <React.Fragment key={index}>
-              <CounterSmall lastIndex={lastRow} row={col} defaultImage={defaultImage} />
+              <CounterSmall
+                positionWinner={winner?.positions?.find((position) => position.row === col && position.col === lastRow)}
+                lastIndex={lastRow}
+                row={col}
+                defaultImage={defaultImage}
+              />
             </React.Fragment>
           ))}
           <div className='absolute top-[-1px] w-full z-10'>{width < 640 ? <BoardSmallBlack /> : <BoardBlackLarge />}</div>
